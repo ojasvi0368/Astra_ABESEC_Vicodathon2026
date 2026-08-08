@@ -19,4 +19,10 @@ function App() {
   );
 }
 
+export default Navbar;
+export default Hero;
+export default Events;
+export default Speakers;
+export default Register;
+export default Footer;
 export default App;
