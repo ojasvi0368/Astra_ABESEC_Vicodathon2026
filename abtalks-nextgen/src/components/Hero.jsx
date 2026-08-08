@@ -1,46 +1,32 @@
-import React from 'react';
+import hero from "../assets/hero.png";
 
-const Hero = () => {
+export default function Hero() {
   return (
-    <section className="hero-section">
-      <div className="hero-container">
-        <div className="hero-badge">
-          🚀 Redesigning ABTalks for Vicodathon 2026
-        </div>
-        <h1 className="hero-title">
-          Build Your Coding Habit. <br />
-          <span className="gradient-text">Get Discovered.</span>
-        </h1>
-        <p className="hero-subtitle">
-          Join the ABTalks community, track your 60-day challenge progress, compete in hackathons, and showcase your real-world tech skills.
-        </p>
-        
-        <div className="btn-group">
-          <a href="#register" className="btn-primary">Join 60 Days Challenge</a>
-          <a href="#events" className="btn-secondary">Explore Hackathons</a>
-        </div>
+    <section id="top" className="hero">
+      <img className="hero-img" src={hero} alt="Speaker on stage at an ABTalks event" />
+      <div className="hero-overlay" />
 
-        <div className="stats-container">
-          <div className="stat-card">
-            <h3>5,000+</h3>
-            <p>Active Hackers</p>
-          </div>
-          <div className="stat-card">
-            <h3>60 Days</h3>
-            <p>Coding Streak</p>
-          </div>
-          <div className="stat-card">
-            <h3>120+</h3>
-            <p>Projects Built</p>
-          </div>
-          <div className="stat-card">
-            <h3>₹50,000+</h3>
-            <p>Prize Pools</p>
-          </div>
+      <div className="container hero-inner">
+        <span className="hero-badge eyebrow">
+          <span className="dot" /> Vicodathon 2026 · Registrations open
+        </span>
+
+        <h1>
+          Conversations that
+          <br />
+          <span className="gradient-text">build things.</span>
+        </h1>
+
+        <p>
+          ABTalks brings operators, designers and engineers on one stage — then hands the mic to the
+          people building next. Reimagined for 2026.
+        </p>
+
+        <div className="hero-actions">
+          <a href="#register" className="btn btn-primary">Register now →</a>
+          <a href="#events" className="btn btn-outline">Browse events</a>
         </div>
       </div>
     </section>
   );
-};
-
-export default Hero;
+}

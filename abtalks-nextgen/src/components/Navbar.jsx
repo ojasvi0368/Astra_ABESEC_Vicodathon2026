@@ -1,21 +1,51 @@
-import React from 'react';
+import { useEffect, useState } from "react";
 
-const Navbar = () => {
+const links = [
+  { href: "#about", label: "About" },
+  { href: "#timeline", label: "Timeline" },
+  { href: "#events", label: "Events" },
+  { href: "#speakers", label: "Speakers" },
+  { href: "#contact", label: "Contact" },
+];
+
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <nav className="navbar">
-      <div className="nav-brand">ABTalks <span style={{ color: '#818cf8', fontSize: '0.8rem' }}>NEXTGEN</span></div>
-      <ul className="nav-links">
-        <li><a href="#dashboard">Dashboard</a></li>
-        <li><a href="#events">Hackathons</a></li>
-        <li><a href="#leaderboard">Leaderboard</a></li>
-        <li><a href="#resources">Roadmaps</a></li>
-        <li><a href="#faq">FAQ</a></li>
-      </ul>
-      <button className="btn-primary" style={{ padding: '8px 20px', fontSize: '0.9rem' }}>
-        Sign In
-      </button>
-    </nav>
-  );
-};
+    <header className={`navbar ${scrolled ? "scrolled" : ""}`}>
+      <nav className="nav-inner">
+        <a href="#top" className="nav-logo">
+          AB<span className="text-ember">Talks</span>
+        </a>
 
-export default Navbar;
+        <div className="nav-links">
+          {links.map((l) => (
+            <a key={l.href} href={l.href}>{l.label}</a>
+          ))}
+          <a href="#register" className="btn btn-primary btn-sm">Register</a>
+        </div>
+
+        <button className="nav-toggle" aria-label="Toggle menu" onClick={() => setOpen(!open)}>
+          {open ? "✕" : "☰"}
+        </button>
+      </nav>
+
+      <div className={`nav-mobile ${open ? "open" : ""}`}>
+        {links.map((l) => (
+          <a key={l.href} href={l.href} onClick={() => setOpen(false)}>{l.label}</a>
+        ))}
+        <a href="#register" className="btn btn-primary btn-sm btn-block" onClick={() => setOpen(false)}>
+          Register
+        </a>
+      </div>
+    </header>
+  );
+}

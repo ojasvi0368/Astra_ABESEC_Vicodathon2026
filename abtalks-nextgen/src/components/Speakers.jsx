@@ -1,31 +1,22 @@
-function Speakers() {
+import { speakers } from "../data/speakers";
+
+export default function Speakers() {
   return (
-    <section className="speakers" id="speakers">
-      <p className="section-tag">MEET THE VOICES</p>
-
-      <h2>Featured Speakers</h2>
-
-      <div className="speaker-grid">
-        <div className="speaker-card">
-          <div className="speaker-avatar">👨🏻‍💻</div>
-          <h3>Tech Innovator</h3>
-          <p>Technology & Innovation</p>
-        </div>
-
-        <div className="speaker-card">
-          <div className="speaker-avatar">👩🏻‍💼</div>
-          <h3>Startup Founder</h3>
-          <p>Entrepreneurship</p>
-        </div>
-
-        <div className="speaker-card">
-          <div className="speaker-avatar">👨🏻‍🚀</div>
-          <h3>Industry Expert</h3>
-          <p>Future Technology</p>
+    <section id="speakers" className="section speakers-section">
+      <div className="container">
+        <h2 className="section-title">Speakers &amp; mentors</h2>
+        <div className="speakers-grid">
+          {speakers.map((s) => (
+            <div className="speaker" key={s.name}>
+              <div className="avatar">{s.initials}</div>
+              <div>
+                <div className="speaker-name">{s.name}</div>
+                <div className="speaker-role">{s.role}</div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 }
-
-export default Speakers;
