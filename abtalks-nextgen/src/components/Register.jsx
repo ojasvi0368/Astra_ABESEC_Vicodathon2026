@@ -1,15 +1,32 @@
 import { useState } from "react";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebase.js";
 
 export default function Register() {
   const [form, setForm] = useState({ name: "", email: "", team: "" });
   const [done, setDone] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const change = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    setDone(`You're on the list! We'll email ${form.email} with your dashboard link.`);
-    setForm({ name: "", email: "", team: "" });
+    setLoading(true);
+    setError("");
+    try {
+      await addDoc(collection(db, "registrations"), {
+        ...form,
+        createdAt: serverTimestamp(),
+      });
+      setDone(`You're on the list! We'll email ${form.email} with your dashboard link.`);
+      setForm({ name: "", email: "", team: "" });
+    } catch (err) {
+      console.error(err);
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -30,10 +47,11 @@ export default function Register() {
             <input required name="name" placeholder="Full name" value={form.name} onChange={change} />
             <input required type="email" name="email" placeholder="Email address" value={form.email} onChange={change} />
             <input name="team" placeholder="Team name (optional)" value={form.team} onChange={change} />
-            <button type="submit" className="btn btn-primary btn-block">
-              Register for Vicodathon 2026
+            <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
+              {loading ? "Submitting..." : "Register for Vicodathon 2026"}
             </button>
             {done && <p className="success">{done}</p>}
+            {error && <p style={{ color: "#f87171" }}>{error}</p>}
             <small>Free for students. No spam, one email per milestone.</small>
           </form>
         </div>
