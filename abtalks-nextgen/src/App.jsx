@@ -34,3 +34,19 @@ export default function App() {
     </main>
   );
 }
+import { Routes, Route } from "react-router-dom";
+import Landing from "./Landing"; // tumhara current homepage
+import Dashboard from "./pages/Dashboard";
+import ChallengeDay from "./pages/ChallengeDay";
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Landing />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/day/12" element={<ChallengeDay />} />
+    </Routes>
+  );
+}
+
+export default App;
