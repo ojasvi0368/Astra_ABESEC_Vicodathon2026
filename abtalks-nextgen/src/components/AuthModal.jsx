@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "../firebase.js";
 
 export default function AuthModal({ isOpen, onClose }) {
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
   if (!isOpen) return null;
+
+  const handleGoogleSignIn = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      console.log("Signed in user:", result.user);
+      onClose();
+    } catch (err) {
+      console.error(err);
+      setError("Sign-in failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div style={styles.overlay}>
@@ -12,20 +32,16 @@ export default function AuthModal({ isOpen, onClose }) {
           Sign in with your Google account to access your 60-Day Challenge Dashboard & Hackathons.
         </p>
 
-        <button 
-          style={styles.googleBtn} 
-          onClick={() => {
-            alert("Signed in successfully!");
-            onClose();
-          }}
-        >
-          <img 
-            src="https://www.svgrepo.com/show/475656/google-color.svg" 
-            alt="Google" 
-            style={{ width: "18px" }} 
+        <button style={styles.googleBtn} onClick={handleGoogleSignIn} disabled={loading}>
+          <img
+            src="https://www.svgrepo.com/show/475656/google-color.svg"
+            alt="Google"
+            style={{ width: "18px" }}
           />
-          Continue with Google
+          {loading ? "Signing in..." : "Continue with Google"}
         </button>
+
+        {error && <p style={{ color: "#f87171", marginTop: "12px", fontSize: "0.85rem" }}>{error}</p>}
       </div>
     </div>
   );
