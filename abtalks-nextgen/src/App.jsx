@@ -11,6 +11,7 @@ import Sponsors from "./components/Sponsors.jsx";
 import Register from "./components/Register.jsx";
 import Contact from "./components/Contact.jsx";
 import Footer from "./components/Footer.jsx";
+import Authmodal from "./components/Authmodal.jsx";
 import "./App.css";
 
 export default function App() {
@@ -29,6 +30,7 @@ export default function App() {
       <Register />
       <Contact />
       <Footer />
+      <Authmodal/>
     </main>
   );
 }
