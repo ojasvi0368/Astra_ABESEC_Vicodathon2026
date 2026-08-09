@@ -19,4 +19,8 @@ const testimonials = [
   },
 ];
 
+<<<<<<< HEAD
 export default testimonials;
+=======
+export default testimonials;
+>>>>>>> ec531151f8bb745ee38bf0a96a5e160639333833

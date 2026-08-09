@@ -25,4 +25,8 @@ const speakers = [
   },
 ];
 
+<<<<<<< HEAD
 export default speakers;
+=======
+export default speakers;
+>>>>>>> ec531151f8bb745ee38bf0a96a5e160639333833
