@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Navbar from "./components/Navbar.jsx";
 import Hero from "./components/Hero.jsx";
 import Stats from "./components/Stats.jsx";
@@ -12,17 +11,13 @@ import Sponsors from "./components/Sponsors.jsx";
 import Register from "./components/Register.jsx";
 import Contact from "./components/Contact.jsx";
 import Footer from "./components/Footer.jsx";
-import AuthModal from "./components/AuthModal.jsx"; // Added Interactive Sign-In Modal
 import "./App.css";
 
 export default function App() {
-  const [isAuthOpen, setIsAuthOpen] = useState(false);
-
   return (
     <main>
-      {/* Pass handler to Navbar to trigger Auth modal */}
-      <Navbar onOpenAuth={() => setIsAuthOpen(true)} />
-      <Hero onOpenAuth={() => setIsAuthOpen(true)} />
+      <Navbar />
+      <Hero />
       <Stats />
       <About />
       <Features />
@@ -31,12 +26,9 @@ export default function App() {
       <Speakers />
       <Testimonials />
       <Sponsors />
-      <Register onOpenAuth={() => setIsAuthOpen(true)} />
+      <Register />
       <Contact />
       <Footer />
-
-      {/* Auth Modal Popup */}
-      <AuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
     </main>
   );
 }

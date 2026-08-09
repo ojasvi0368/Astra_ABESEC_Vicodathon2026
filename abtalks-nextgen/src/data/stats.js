@@ -21,3 +21,4 @@ export const timeline = [
 ];
 
 export const sponsors = ["NIMBUS", "Orbit Labs", "Kettle", "Northpoint", "Rivet", "Sundial"];
+

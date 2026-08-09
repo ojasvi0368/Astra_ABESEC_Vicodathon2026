@@ -332,3 +332,4 @@ img { display: block; max-width: 100%; }
 .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
 .footer-logo { font-family: var(--font-display); font-weight: 700; }
 .footer p { font-size: 14px; color: var(--muted); }
+
